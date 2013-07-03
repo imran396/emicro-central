@@ -1,0 +1,3 @@
+emicro_core_homepage:
+    pattern:  /hello/{name}/{id}
+    defaults: { _controller: EmicroCoreBundle:Default:index }
