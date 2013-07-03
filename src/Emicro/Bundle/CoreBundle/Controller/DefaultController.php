@@ -6,11 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name, $id)
+    public function indexAction()
     {
-        return $this->render('EmicroCoreBundle:Default:index.html.twig', array(
-            'name' => $name,
-            'id' => $id
-        ));
+        return $this->render('EmicroCoreBundle:Default:index.html.twig');
     }
 }
