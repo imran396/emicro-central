@@ -31,35 +31,35 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=50)
+     * @ORM\Column(name="city", type="string", length=50, nullable=true)
      */
     private $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="state", type="string", length=50)
+     * @ORM\Column(name="state", type="string", length=50, nullable=true)
      */
     private $state;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="postal_code", type="integer")
+     * @ORM\Column(name="postal_code", type="integer", nullable=true)
      */
     private $postalCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=50)
+     * @ORM\Column(name="country", type="string", length=50, nullable=true)
      */
     private $country;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_present", type="boolean")
+     * @ORM\Column(name="is_present", type="boolean", nullable=true)
      */
     private $isPresent;
 
@@ -214,5 +214,21 @@ class Address
     public function getIsPresent()
     {
         return $this->isPresent;
+    }
+
+    /**
+     * @param mixed $employee
+     */
+    public function setEmployee($employee)
+    {
+        $this->employee = $employee;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmployee()
+    {
+        return $this->employee;
     }
 }

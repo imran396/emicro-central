@@ -16,4 +16,33 @@ class EmployeeRepository extends EntityRepository
     {
         return $this->findAll();
     }
+
+    public function create($data)
+    {
+        $employee = new Employee();
+        $employee->setFirstName($data['first_name']);
+        $employee->setLastName($data['last_name']);
+        $employee->setDesignation($data['designation']);
+        $employee->setEmail($data['email']);
+        $employee->setContactNumber($data['contact_number']);
+
+        foreach ($data['addresses'] as $address) {
+
+            $addressEntity = new Address();
+            $addressEntity->setStreet($address['street']);
+            $addressEntity->setCity($address['city']);
+            $addressEntity->setState($address['state']);
+            $addressEntity->setPostalCode($address['postal_code']);
+            $addressEntity->setCountry($address['country']);
+            $addressEntity->setIsPresent($address['is_present']);
+
+            $employee->addAddress($addressEntity);
+            $addressEntity->setEmployee($employee);
+
+            $this->_em->persist($addressEntity);
+        }
+
+        $this->_em->persist($employee);
+        $this->_em->flush();
+    }
 }

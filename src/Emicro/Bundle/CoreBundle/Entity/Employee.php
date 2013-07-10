@@ -167,4 +167,45 @@ class Employee
     {
         return $this->firstName . ' ' . $this->lastName;
     }
+
+    /**
+     * @param mixed $addresses
+     * @return $this
+     */
+    public function setAddresses($addresses)
+    {
+        $this->addresses = $addresses;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
+    }
+
+    public function addAddress($address)
+    {
+        $this->addresses[] = $address;
+    }
+
+    /**
+     * @param string $contactNumber
+     * @return $this
+     */
+    public function setContactNumber($contactNumber)
+    {
+        $this->contactNumber = $contactNumber;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContactNumber()
+    {
+        return $this->contactNumber;
+    }
 }

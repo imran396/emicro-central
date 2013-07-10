@@ -1,3 +1,7 @@
 emicro_core_employees:
     pattern:  /
     defaults: { _controller: EmicroCoreBundle:Employee:index }
+
+emicro_core_employees_test:
+    pattern:  /employees/test
+    defaults: { _controller: EmicroCoreBundle:Employee:test }
