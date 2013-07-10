@@ -49,6 +49,17 @@ class Employee
      */
     private $email;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact_number", type="string", length=50)
+     */
+    private $contactNumber;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="employee")
+     */
+    private $addresses;
 
     /**
      * Get id
