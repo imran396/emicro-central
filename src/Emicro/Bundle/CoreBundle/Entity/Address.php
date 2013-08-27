@@ -64,7 +64,7 @@ class Address
     private $isPresent;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Employee", inversedBy="addresses")
+     * @ORM\OneToOne(targetEntity="Employee", inversedBy="addresses")
      */
     private $employee;
 

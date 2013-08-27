@@ -6,6 +6,12 @@
 
     <h2>Employees</h2>
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
     <table class="table table-bordered">
 
         <thead>

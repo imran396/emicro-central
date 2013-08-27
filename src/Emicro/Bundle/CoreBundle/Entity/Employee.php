@@ -57,7 +57,7 @@ class Employee
     private $contactNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="employee")
+     * @ORM\OneToOne(targetEntity="Address", mappedBy="employee")
      */
     private $addresses;
 
@@ -208,4 +208,5 @@ class Employee
     {
         return $this->contactNumber;
     }
+
 }

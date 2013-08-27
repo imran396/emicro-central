@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employees | {{ parent() }} {% endblock %}
+
+{% block body %}
+
+    <h2>Employees</h2>
+
+    <form action="{{ path('emicro_core_employees_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal form-add-edit" novalidate="novalidate">
+
+        {{ form_widget(form) }}
+        {{ form_row (form._token) }}
+
+    </form>
+{% endblock %}

@@ -5,3 +5,14 @@ emicro_core_employees:
 emicro_core_employees_test:
     pattern:  /employees/test
     defaults: { _controller: EmicroCoreBundle:Employee:test }
+
+
+emicro_core_employees_create:
+    pattern:  /employee/create
+    defaults: { _controller: EmicroCoreBundle:Employee:create }
+
+emicro_core_employees_edit:
+    pattern:  /employee/edit/{id}
+    defaults: { _controller: EmicroCoreBundle:Employee:edit }
+    requirements:
+          id:  \d+

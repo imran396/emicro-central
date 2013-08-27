@@ -2,7 +2,10 @@
 
 namespace Emicro\Bundle\CoreBundle\Controller;
 
+use Emicro\Bundle\CoreBundle\Entity\Employee;
+use Emicro\Bundle\CoreBundle\Form\EmployeeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class EmployeeController extends Controller
@@ -46,5 +49,66 @@ class EmployeeController extends Controller
 
         $this->getDoctrine()->getRepository('EmicroCoreBundle:Employee')->create($data);
         return new Response("OK");
+    }
+
+    public function createAction(Request $request)
+    {
+        $entity  = new Employee();
+        $form = $this->createForm(new EmployeeType(), $entity);
+
+        if ($request->getMethod() == 'POST') {
+
+            $form->submit($request);
+
+            if ($form->isValid()) {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Your changes were saved!'
+                );
+
+                return $this->redirect($this->generateUrl('emicro_core_employees'));
+            }
+        }
+
+        return $this->render('EmicroCoreBundle:Employee:create.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+    }
+
+    public function editAction(Request $request, Employee $entity)
+    {
+        $form = $this->createForm(new EmployeeType(), $entity);
+
+        if ($request->getMethod() == 'POST') {
+
+            $form->submit($request);
+
+            if ($form->isValid()) {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Your changes were saved!'
+                );
+
+                return $this->redirect($this->generateUrl('emicro_core_employees'));
+            }
+        }
+
+        return $this->render('EmicroCoreBundle:Employee:create.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
     }
 }
