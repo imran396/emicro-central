@@ -12,4 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class AddressRepository extends EntityRepository
 {
+
+    public function prepareAddress(Address $addressData)
+    {
+        if (is_null($addressData->getId())) {
+            $address = new Address();
+        } else {
+            $address = $this->find($addressData->getId());
+        }
+
+        $address->setStreet($addressData->getStreet());
+        $address->setCity($addressData->getCity());
+        $address->setState($addressData->getState());
+        $address->setPostalCode($addressData->getPostalCode());
+        $address->setCountry($addressData->getCountry());
+        $address->setIsPresent($addressData->getIsPresent());
+
+        return $address;
+    }
 }

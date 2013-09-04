@@ -19,30 +19,32 @@ class EmployeeRepository extends EntityRepository
 
     public function create($data)
     {
-        $employee = new Employee();
-        $employee->setFirstName($data['first_name']);
-        $employee->setLastName($data['last_name']);
-        $employee->setDesignation($data['designation']);
-        $employee->setEmail($data['email']);
-        $employee->setContactNumber($data['contact_number']);
+        $employee = $this->prepareEmployee($data);
 
-        foreach ($data['addresses'] as $address) {
-
-            $addressEntity = new Address();
-            $addressEntity->setStreet($address['street']);
-            $addressEntity->setCity($address['city']);
-            $addressEntity->setState($address['state']);
-            $addressEntity->setPostalCode($address['postal_code']);
-            $addressEntity->setCountry($address['country']);
-            $addressEntity->setIsPresent($address['is_present']);
-
-            $employee->addAddress($addressEntity);
-            $addressEntity->setEmployee($employee);
-
-            $this->_em->persist($addressEntity);
-        }
+        $address  = $this->_em->getRepository("EmicroCoreBundle:Address")->prepareAddress($data->getAddresses());
+        $address->setEmployee($employee);
 
         $this->_em->persist($employee);
+        $this->_em->persist($address);
         $this->_em->flush();
     }
+
+    public function prepareEmployee(Employee $employeeData)
+    {
+        if (is_null($employeeData->getId())) {
+            $employee = new Employee();
+        } else {
+            $employee = $this->find($employeeData->getId());
+        }
+
+        $employee->setFirstName($employeeData->getFirstName());
+        $employee->setLastName($employeeData->getLastName());
+        $employee->setDesignation($employeeData->getDesignation());
+        $employee->setEmail($employeeData->getEmail());
+        $employee->setContactNumber($employeeData->getContactNumber());
+
+        return $employee;
+    }
+
+
 }

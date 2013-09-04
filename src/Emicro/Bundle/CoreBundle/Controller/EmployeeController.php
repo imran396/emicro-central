@@ -54,7 +54,7 @@ class EmployeeController extends Controller
     public function createAction(Request $request)
     {
         $entity  = new Employee();
-        $form = $this->createForm(new EmployeeType(), $entity);
+        $form = $this->createForm(new EmployeeType());
 
         if ($request->getMethod() == 'POST') {
 
@@ -62,10 +62,7 @@ class EmployeeController extends Controller
 
             if ($form->isValid()) {
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($entity);
-
-                $em->flush();
+                $this->getDoctrine()->getRepository("EmicroCoreBundle:Employee")->create($form->getData());
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
@@ -94,7 +91,7 @@ class EmployeeController extends Controller
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($entity);
-
+                $em->persist($entity->getAddresses());
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add(
