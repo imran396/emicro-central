@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Emicro\Bundle\CoreBundle\EmicroCoreBundle(),
+            new Emicro\Bundle\TestBundle\EmicroTestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
