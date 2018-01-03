@@ -1,5 +1,8 @@
+language: php
 php:
-    - 5.5
+  - 5.3
+  - 5.4
+  - 5.5
 
 before_script:
   - cp app/config/parameters.yml.travis app/config/parameters.yml
@@ -13,4 +16,4 @@ script:
 
 notifications:
   email:
-    -  imran3968@gmail.com
+    -  matteo.biagetti@gmail.com
